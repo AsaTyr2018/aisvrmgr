@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log Stream - {{ service_name | capitalize }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        #logs {
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            max-height: 80vh;
+            white-space: pre-wrap;
+        }
+        .back-button {
+            display: inline-block;
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        .back-button:hover {
+            background-color: #777;
+        }
+        .fa-arrow-left {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-button">Zurück</a>
+    <div id="logs"></div>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/logs');
+            socket.emit('join', {service_name: "{{ service_name }}"});
+
+            socket.on('log_update', function(msg) {
+                var logsElement = document.getElementById('logs');
+                var newElement = document.createElement('div');
+                newElement.textContent = msg.data;
+                logsElement.appendChild(newElement);
+                // Scroll to the bottom every time a new log entry is added
+                logsElement.scrollTop = logsElement.scrollHeight;
+            });
+        });
+    </script>
+</body>
+</html>
+

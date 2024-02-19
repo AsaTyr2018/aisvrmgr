@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Manager</title>
+    <style>
+        body { 
+            background-color: #222;
+            color: white; 
+            font-family: Arial, sans-serif; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .service { 
+            margin-bottom: 20px; 
+        }
+        .status { 
+            font-weight: bold; 
+        }
+        .running { 
+            color: #0f0; 
+        }
+        .stopped { 
+            color: #f00; 
+        }
+        .failed { 
+            color: #ff0; 
+        }
+	a:visited {
+            color: #4E9CAF;
+            text-decoration: none;
+    	}
+    	a:hover, a:active {
+            color: #D6EFFF;
+            text-decoration: underline;
+    	}    
+	a:link, a:visited {
+	    color: #4E9CAF; /* Helles Blau */
+	    text-decoration: none;
+	}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Service Manager</h1>
+        {% for service, status in services.items() %}
+        <div class="service">
+            <h2>{{ service | capitalize }}</h2>
+            Status: <span class="status {{ status }}">{{ status }}</span>
+            <div>
+                <a href="/manage_service/start/{{ service }}">Start</a>
+                <a href="/manage_service/stop/{{ service }}">Stop</a>
+                <a href="/logs/{{ service }}" class="log-link">Logs</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
