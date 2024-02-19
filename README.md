@@ -1,4 +1,9 @@
-﻿# Generative AI Control Panel
+# **Alpha Test Software Notice**
+
+This software is in its Alpha testing phase, indicating it is an early version that may still contain bugs and is not feature-complete. Alpha testing allows users to explore new features and contribute to the development process through feedback. However, using Alpha software in live environments carries risks, including potential instability and data loss. While engaging with Alpha versions can be exciting due to their novelty, it's crucial to proceed with caution to mitigate potential issues.
+
+ 
+ # Generative AI Control Panel
 
 The Generative AI Control Panel is a sophisticated Flask-based web application designed to manage and monitor services for Generative AIs like A1111, Fooocus, and Kohya. This tool enables easy control over AI services, including starting, stopping, and monitoring through an intuitive web interface. 
 
